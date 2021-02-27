@@ -6,13 +6,13 @@ Run bellow command line
 
     $ mkdir nextcloud
     $ cd nextcloud
-    $ git clone http://10.61.173.178/nextcloud/docker.git 
+    $ git clone http://github.com/nextcloud/docker.git 
 
 ### Step 2: Clone nextcloud/server 
 
 Enter same folder which you cloned nextcloud/docker, then clone nextcloud/server. 
 
-    $ git clone http://10.61.173.178/nextcloud/server.git 
+    $ git clone http://github.com/nextcloud/server.git 
     $ cd server 
     $ git checkout d50e8d85c712991702894e80811c861df4262bbe 
     $ git submodule update --init
@@ -34,7 +34,7 @@ You can edit Dockerfile or plit it out become 2 files: Dockerfile_prebuild and D
 After *FROM php:7.4-apache-buster* line of **Dockerfile_prebuild** add the following to setup proxy for pecl install: 
 
     ...
-    RUN pear config-set http_proxy http://10.61.11.42:3128 
+    RUN pear config-set http_proxy http://private_ip 
     ...
 
 
@@ -102,15 +102,15 @@ Create **.dockerignore** file in nextcloud/server:
 After all of step above run following cmd to build prebuild from **Dockerfile_prebuild**: 
 
     $ docker build \
-    --build-arg http_proxy=http://10.61.11.42:3128 \
-    --build-arg https_proxy=http://10.61.11.42:3128 \
+    --build-arg http_proxy=http://private_ip \
+    --build-arg https_proxy=http://private_ip \
     -t nextcloud:prebuild -f Dockerfile_prebuild . 
 
 After success prebuild run cmd to build nextcloud image from **Dockerfile_1**: 
 
     $ docker build \
-    --build-arg http_proxy=http://10.61.11.42:3128 \
-    --build-arg https_proxy=http://10.61.11.42:3128 \
+    --build-arg http_proxy=http://private_ip \
+    --build-arg https_proxy=http://private_ip \
     -t nextcloud:20.0.4-apache -f Dockerfile_1 . 
 
 ### Step 5: Create docker compose file 
@@ -176,8 +176,8 @@ And create **db.env** file:
  
 And create **app.env** file: 
 
-    HTTP_PROXY=10.61.11.42:3128
-    HTTPS_PROXY=10.61.11.42:3128
+    HTTP_PROXY=private_ip
+    HTTPS_PROXY=private_ip
     NO_PROXY=localhost,127.0.0.*
 
 You can delete all volumes before setup new app by:
