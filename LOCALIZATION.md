@@ -5,8 +5,8 @@
 
     $ sudo su
     $ vi /etc/apt/apt.conf
-        > Acquire::http::proxy "http://10.61.11.42:3128";
-        > Acquire::https::proxy "http://10.61.11.42:3128";
+        > Acquire::http::proxy "http://private_ip";
+        > Acquire::https::proxy "http://private_ip";
 
 ### Step 2: Install required dependencies
 
@@ -23,8 +23,8 @@ In case you want to use sqlite over mysql
 
 ### Step 3: Clone repository into your directory
 
-    $ git config --global http.proxy "http://10.61.11.42:3128"
-    $ git clone http://10.61.173.6:8929/nextcloud/server.git
+    $ git config --global http.proxy "http://private_ip"
+    $ git clone https://github.com/nextcloud/server.git
 
 ### Step 4: Install submodule and grant permission for local user
 
