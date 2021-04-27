@@ -1,4 +1,4 @@
-# User Guide 
+# User Guide to build Nextcloud from source code (github)
  
 ### Step 1: Clone nextcloud/docker 
 
